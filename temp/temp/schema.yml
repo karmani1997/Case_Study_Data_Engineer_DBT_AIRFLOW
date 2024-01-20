@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: schema
+    description: raw data
+    database: raw
+    schema: energy
+    tables:
+      - name: "product"
+      - name: "prices"
+      - name: "contracts"

@@ -3,3 +3,5 @@
 dbt_packages/
 target/
 logs/
+src_data/
+profiles.yml

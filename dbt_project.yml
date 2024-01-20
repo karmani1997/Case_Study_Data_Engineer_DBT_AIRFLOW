@@ -50,6 +50,8 @@ tests:
 
 models:
   lichtblick:
-    +database: "raw"
-    +schema: "analytics"
-    +materialized: table
+    cdm:
+      +database: "raw"
+      +schema: "analytics"
+      +materialized: "table"
+      +path: "models/cdm/*.sql"

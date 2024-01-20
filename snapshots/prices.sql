@@ -4,12 +4,12 @@
         config(
           target_schema='analytics',
           strategy='check',
-          unique_key='\"id\"',
+          unique_key='\"ID\"',
           check_cols='all',
         )
     }}
 
 
-select * from {{ ref('prices') }}
+select * from {{source('cdm_db','cdm_prices')}}--{{ ref('prices') }}
 
 {% endsnapshot %}

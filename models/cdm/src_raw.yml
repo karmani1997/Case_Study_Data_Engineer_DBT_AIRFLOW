@@ -1,0 +1,42 @@
+version: 2
+
+sources:
+  - name: raw_data
+    schema: energy
+    tables:
+      - name: "PRODUCTS"
+        desc: store product details per row
+        columns:
+          - name: "ID"
+            tests:
+              - unique
+              - not_null
+          - name: "DELETED"
+            desc: 0 means not deleted and 1 means deleted
+            tests:
+              - accepted_values:
+                  values:
+                    - 1
+                    - 0
+          - name: "MODIFICATIONDATE"
+            tests:
+              - not_null
+          - name: "PRODUCTCODE"
+            tests:
+              - not_null
+          - name: "PRODUCTNAME"
+            tests:
+              - not_null
+
+      - name: "PRICES"
+        columns:
+          - name: "ID"
+            tests:
+              - unique
+              - not_null
+          - name: "PRODUCTID"
+            tests:
+              - relationships:
+                  to: ref('products')
+                  field: "ID"
+      - name: "contracts"

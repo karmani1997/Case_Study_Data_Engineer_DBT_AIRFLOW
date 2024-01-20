@@ -1,0 +1,44 @@
+version: 2
+
+sources:
+  - name: source
+    description: raw data
+    database: raw
+    schema: energy
+    tables:
+      - name: "cdm_products"
+        desc: store product details per row
+        columns:
+          - name: "ID"
+            tests:
+              - unique
+              - not_null
+          - name: "DELETED"
+            desc: 0 means not deleted and 1 means deleted
+            tests:
+              - accepted_values:
+                  values:
+                    - 1
+                    - 0
+          - name: "MODIFICATIONDATE"
+            tests:
+              - not_null
+          - name: "PRODUCTCODE"
+            tests:
+              - not_null
+          - name: "PRODUCTNAME"
+            tests:
+              - not_null
+
+      - name: "cdm_prices"
+        columns:
+          - name: "ID"
+            tests:
+              - unique
+              - not_null
+          - name: "PRODUCTID"
+            tests:
+              - relationships:
+                  to: ref('cdm_products')
+                  field: "ID"
+      - name: "cdm_contracts"
