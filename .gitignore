@@ -5,3 +5,6 @@ target/
 logs/
 src_data/
 profiles.yml
+myenv/
+.user.yml
+dags/__pycache__/extractor.cpython-311.pyc

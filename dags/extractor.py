@@ -2,6 +2,7 @@ import os
 import numpy as np
 import pandas as pd
 import shutil
+import logging
 from datetime import datetime
 
 
@@ -25,7 +26,9 @@ def extractor(src_folder, dest_folder, logs_folder,common_prefix):
         df.columns = map(lambda x: str(x).upper(), df.columns)
         df.to_csv(os.path.join(dest_folder, new_file_name), index=False)
         # Move the file from the source to the destination folder
+        logging.info('new raw files placed in seed folder for DWH loading')
         shutil.move(os.path.join(src_folder, file), os.path.join(logs_folder, file))
+        logging.info('new raw files moved to raw_files backup folder')
 
 def move_files(src_folder, dest_folder, common_prefix):
     # List all files in the specified directory
@@ -38,23 +41,7 @@ def move_files(src_folder, dest_folder, common_prefix):
 
         # Move the file from the source to the destination folder
         shutil.move(os.path.join(src_folder, file), os.path.join(dest_folder, new_file))
-
-# Example Usage:
-seed_folder = "../seeds"
-processed_folder = "../logs/processed_files"
-#common_prefix = datetime.today().strftime('%Y%m%d') + "22"
-src_folder = "../src_data"
-logs_folder = "../logs/raw_files"
-script_directory = os.path.dirname(os.path.abspath(__file__))
-src_folder = os.path.join(script_directory, src_folder)
-logs_folder = os.path.join(script_directory, logs_folder)
-processed_folder = os.path.join(script_directory, processed_folder)
-seed_folder = os.path.join(script_directory, seed_folder)
+        logging.info('files moved from seed folder to processed folder')
 
 
-#common_prefix = datetime.today().strftime("%Y%m%d") #+ "22"
-common_prefix = "20201001"
-
-extractor(src_folder, seed_folder,logs_folder, common_prefix)
-#move_files(seed_folder, processed_folder, common_prefix)
 
