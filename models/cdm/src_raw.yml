@@ -41,19 +41,4 @@ sources:
               - relationships:
                   to: ref('products')
                   field: "ID"
-
-      - name: "CONTRACTS"
-        # config:
-        #   enabled: false
-        columns:
-          - name: "ID"
-            tests:
-              - unique
-              - not_null
-
-      # - name: "CONTRACTS"
-      #   columns:
-      #     - name: "ID"
-      #       tests:
-      #         - unique
-      #         - not_null
+      - name: "CONTRACTS" 

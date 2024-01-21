@@ -4,8 +4,8 @@ version: 2
 sources:
 
   - name: cdm_db
-    schema: analytics
+    schema: "analytics"
     tables:
       - name: cdm_products
       - name: cdm_prices
-      - name: cdm_contracts
+      - name: cdm_customer_contracts
