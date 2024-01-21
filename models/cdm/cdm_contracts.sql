@@ -1,3 +1,3 @@
 
 --select * from {{ref('contracts')}}--{{source('source','contracts')}}
-select * from {{source('raw_db','contracts')}}
+select * from {{source('raw_data','CONTRACTS')}}

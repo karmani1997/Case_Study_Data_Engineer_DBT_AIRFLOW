@@ -43,10 +43,18 @@ def move_files(src_folder, dest_folder, common_prefix):
 seed_folder = "../seeds"
 processed_folder = "../logs/processed_files"
 #common_prefix = datetime.today().strftime('%Y%m%d') + "22"
-src_folder = "../src_data/"
+src_folder = "../src_data"
 logs_folder = "../logs/raw_files"
+script_directory = os.path.dirname(os.path.abspath(__file__))
+src_folder = os.path.join(script_directory, src_folder)
+logs_folder = os.path.join(script_directory, logs_folder)
+processed_folder = os.path.join(script_directory, processed_folder)
+seed_folder = os.path.join(script_directory, seed_folder)
+
+
 #common_prefix = datetime.today().strftime("%Y%m%d") #+ "22"
 common_prefix = "20201001"
 
 extractor(src_folder, seed_folder,logs_folder, common_prefix)
 #move_files(seed_folder, processed_folder, common_prefix)
+

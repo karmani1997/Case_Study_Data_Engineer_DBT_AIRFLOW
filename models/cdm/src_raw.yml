@@ -3,6 +3,8 @@ version: 2
 sources:
   - name: raw_data
     schema: energy
+    # config:
+    #   enabled: true
     tables:
       - name: "PRODUCTS"
         desc: store product details per row
@@ -39,4 +41,19 @@ sources:
               - relationships:
                   to: ref('products')
                   field: "ID"
-      - name: "contracts"
+
+      - name: "CONTRACTS"
+        # config:
+        #   enabled: false
+        columns:
+          - name: "ID"
+            tests:
+              - unique
+              - not_null
+
+      # - name: "CONTRACTS"
+      #   columns:
+      #     - name: "ID"
+      #       tests:
+      #         - unique
+      #         - not_null

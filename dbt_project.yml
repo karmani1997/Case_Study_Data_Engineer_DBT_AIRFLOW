@@ -36,18 +36,6 @@ clean-targets:         # directories to be removed by `dbt clean`
 # continue to be built as views. These settings can be overridden in the individual model files
 # using the `{{ config(...) }}` macro.
 
-
-seeds:
-  +database: "raw"
-  +schema: "energy"
-  +quote_columns: true
-  +delimiter: ","
-
-tests:
-  +store_failures: true  # all tests
-  +database: "raw"
-  +schema: "test_fail"
-
 models:
   lichtblick:
     cdm:
@@ -55,3 +43,16 @@ models:
       +schema: "analytics"
       +materialized: "table"
       +path: "models/cdm/*.sql"
+
+seeds:
+  +database: "raw"
+  +schema: "energy"
+  +quote_columns: true
+  +delimiter: ","
+  enabled: true
+
+tests:
+  +store_failures: true  # all tests
+  +database: "raw"
+  +schema: "test_fail"
+
