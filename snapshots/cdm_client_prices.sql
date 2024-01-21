@@ -1,4 +1,4 @@
-{% snapshot customer_contracts_snapshot %}
+{% snapshot prices_snapshot %}
 
  {{
         config(
@@ -10,6 +10,6 @@
     }}
 
 
-select * from {{source('cdm_db','cdm_customer_contracts')}}
+select * from {{source('cdm_db','cdm_client_prices')}}--{{ ref('prices') }}
 
 {% endsnapshot %}

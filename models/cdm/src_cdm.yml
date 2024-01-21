@@ -6,6 +6,6 @@ sources:
   - name: cdm_db
     schema: "analytics"
     tables:
-      - name: cdm_products
-      - name: cdm_prices
-      - name: cdm_customer_contracts
+      - name: cdm_client_products
+      - name: cdm_client_prices
+      - name: cdm_client_contracts
