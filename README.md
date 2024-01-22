@@ -1,4 +1,4 @@
-# ETL Pipeline for Monthly Data
+# ETL Pipeline
 
 ## Overview
 
