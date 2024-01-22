@@ -12,39 +12,51 @@ This ETL pipeline automates the extraction, transformation, and loading (ETL) pr
 - **/seed:** Clean data for loading into DWH using dbt.
 - **/macro:** To load the default schema.
 
-## Requirements
-
-- Python 3.x
-- dbt
-- Apache Airflow
-
 ## Setup
 
 1. **Clone the repository:** 
    git clone https://github.com/karmani1997/Case_Study_Data_Engineer_LichtBlick.git
 2. Open terminal and navigate to the project.
 3. Activate the virtual environment command: `source myenv/bin/activate`
-4. Install Python dependencies: `pip install -r requirements.txt`
+4. Install Python dependencies: 
+```
+pip install --upgrade pip
+pip install -r requirements.txt
+```
 5. Set up dbt profiles and connection details in `profiles.yml`.
-6. Configure Apache Airflow.
+6. Airflow Installation and Configuration.
 
-* Install Apache Airflow:
-` 
+* Install Apache Airflow with Celery Executor:
+``` 
 pip install "apache-airflow[celery]==2.8.1" --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-2.8.1/constraints-3.8.txt"
-`
-
-`
+```
+* Initialize the airflow database
+```
 airflow db init
-`
-`
-airflow users create     --username admin     --firstname Mehtab     --lastname Meghwar     --role Admin     --email email.com
-`
-* setup the dags path:
-`sed -i 's|^dags_folder.*$|dags_folder = /home/mehtab/github/Case_Study_Data_Engineer_LichtBlick/dags|' /home/mehtab/airflow/a
+```
+* Create Airflow User
+```
+airflow users create \
+    --username admin  \
+    --firstname <<enter your first name>> \
+    --lastname  <<enter your last name>> \
+    --role Admin \
+    --email  <<enter your email>>
+```
+* Setup Dags Path
+
+```
+sed -i 's|^dags_folder.*$|dags_folder = /home/mehtab/github/Case_Study_Data_Engineer_LichtBlick/dags|' /home/mehtab/airflow/a
 irflow.cfg
-`
-`airflow webserver -p 8080`
-`airflow scheduler`
+```
+* Start Airflow Webserver
+```
+airflow webserver -p 8080
+```
+* Start Airflow Scheduler
+```
+airflow scheduler
+```
 
 # ETL Process
 
@@ -73,13 +85,22 @@ irflow.cfg
 
 # Data Analysis
 
-After the ETL process, answers of the questions given below & queries are available in the `analyses/result_queries.sql`:
+After the ETL process, answers of the questions given below & sql queries on cdm historization tables are available here `analyses/result_queries.sql`:
 
-1. **Use dbt to query the Data Warehouse for the average revenue per contract between 01.10.2020 and 01.01.2021.**
-   - Answer: Result available in the `analyses/answer_1.csv` file.
+1. **How did the average revenue (base price + consumption * energy price , Grundpreis +
+Verbrauch * Arbeitspreis) per contract develop between 01.10.2020 and 01.01.2021?**
+- Average revenue per contract between October 1, 2020, and January 1, 2021 is based on the sum of two components for each contract:
+    - Base Price Component (Grundpreis):
+        For each contract, if the PRICECOMPONENTID is 1, the corresponding PRICE is added to the total.
+    - Consumption * Energy Price Component (Verbrauch * Arbeitspreis):
 
-2. **Query the Data Warehouse to find the number of contracts on delivery on 01.01.2021.**
+        For each contract, if the PRICECOMPONENTID is 2, the product of the contract's USAGE and the PRICE divided by 100 to convert the cents to euros is added to the total.
+- The average revenue is then calculated by summing up these two components and dividing by the total number of contracts.
+
+- Result: datasheet available in the `analyses/answer_1.csv` file.
+
+2. **How many contracts were on delivery on 01.01.2021?**
    - Answer: Zero.
 
-3. **Check the logs or dbt run results to determine how many new contracts were loaded on 01.12.2020.**
+3. **How many new contract were loaded into the DWH on 01.12.2020?**
    - Answer: 1720.
