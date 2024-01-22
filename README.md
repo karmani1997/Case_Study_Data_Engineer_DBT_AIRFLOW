@@ -37,11 +37,11 @@ airflow db init
 * Create Airflow User
 ```
 airflow users create \
-    --username admin  \
-    --firstname <<enter your first name>> \
-    --lastname  <<enter your last name>> \
+    --username admin \
+    --firstname <first_name> \
+    --lastname <last_name> \
     --role Admin \
-    --email  <<enter your email>>
+    --email <email>
 ```
 * Setup Dags Path
 
