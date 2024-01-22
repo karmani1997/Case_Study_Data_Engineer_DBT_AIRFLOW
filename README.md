@@ -11,6 +11,7 @@ This ETL pipeline automates the extraction, transformation, and loading (ETL) pr
 - **/dags:** Apache Airflow DAGs & python scripts for orchestrating the ETL workflow.
 - **/seed:** Clean data for loading into DWH using dbt.
 - **/macro:** To load the default schema.
+- **/analyses:** Scripts to create database, schema, sql queries of questions that is asked in case study
 
 ## Setup
 
