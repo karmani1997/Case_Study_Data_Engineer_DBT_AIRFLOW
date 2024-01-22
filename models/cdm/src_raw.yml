@@ -41,4 +41,18 @@ sources:
               - relationships:
                   to: ref('products')
                   field: "ID"
-      - name: "CONTRACTS" 
+      - name: "CONTRACTS"
+        columns:
+          - name: "ID"
+            tests:
+              - unique
+              - not_null
+          - name: "PRODUCTID"
+            tests:
+              - relationships:
+                  to: ref('products')
+                  field: "ID"
+          - name: status
+            tests:
+              - accepted_values:
+                  values: ['active','cancelled','terminated','indelivery']
