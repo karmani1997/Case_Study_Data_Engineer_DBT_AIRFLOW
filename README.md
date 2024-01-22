@@ -106,4 +106,5 @@ Verbrauch * Arbeitspreis) per contract develop between 01.10.2020 and 01.01.2021
    - Answer: 1720.
 
 ## Improvements
-1. Add more test cases using dbt_utils packages
+- Monitor your data quality, operation and performance directly from your dbt project using elementary-data/elementary package.
+- Add Singular Test Cases using dbt_utils packages
