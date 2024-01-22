@@ -58,18 +58,18 @@ airflow webserver -p 8080
 airflow scheduler
 ```
 
-# ETL Process
+## ETL Process
 
-## Extraction
+### Extraction
 
 - Data exports are expected to be available in the `/src_data` directory with filenames following the naming convention `yyyymmddhhmmss_TABLENAME.csv`.
 
-## Transformation
+### Transformation
 
 - Python scripts in `/dags/extractor.py` perform initial data transformations.
 - dbt models in `/dbt_models` handle additional transformations and CDM historization.
 
-## Loading
+### Loading
 
 - Airflow DAGs in `etl_pipeline` schedule and orchestrate the ETL process.
 - Airflow tasks include:
@@ -77,13 +77,13 @@ airflow scheduler
   - Running dbt transformations.
   - Loading data into the Data Warehouse.
 
-# Usage
+## Usage
 
 1. Start Apache Airflow: `airflow webserver -p 8080` and `airflow scheduler`.
 2. Access the Airflow web UI: [http://localhost:8080](http://localhost:8080).
 3. Trigger the appropriate DAG to run the ETL process.
 
-# Data Analysis
+## Data Analysis
 
 After the ETL process, answers of the questions given below & sql queries on cdm historization tables are available here `analyses/result_queries.sql`:
 
@@ -104,3 +104,6 @@ Verbrauch * Arbeitspreis) per contract develop between 01.10.2020 and 01.01.2021
 
 3. **How many new contract were loaded into the DWH on 01.12.2020?**
    - Answer: 1720.
+
+## Improvements
+1. Add more test cases using dbt_utils packages
